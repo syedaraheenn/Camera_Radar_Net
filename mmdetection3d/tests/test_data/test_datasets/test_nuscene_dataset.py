@@ -6,7 +6,7 @@ import torch
 
 from mmdet3d.datasets import NuScenesDataset
 
-
+print("I am test_nuscenes_dataset")
 def test_getitem():
     np.random.seed(0)
     point_cloud_range = [-50, -50, -5, 50, 50, 3]

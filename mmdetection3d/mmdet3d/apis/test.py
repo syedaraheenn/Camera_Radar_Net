@@ -7,7 +7,7 @@ from mmcv.image import tensor2imgs
 
 from mmdet3d.models import (Base3DDetector, Base3DSegmentor,
                             SingleStageMono3DDetector)
-
+print("I am testt in apis")
 
 def single_gpu_test(model,
                     data_loader,

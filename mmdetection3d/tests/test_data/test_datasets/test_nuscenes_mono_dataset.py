@@ -8,7 +8,7 @@ import pytest
 import torch
 
 from mmdet3d.datasets import NuScenesMonoDataset
-
+print("I am test_nuscenes_mono")
 
 def test_getitem():
     np.random.seed(0)

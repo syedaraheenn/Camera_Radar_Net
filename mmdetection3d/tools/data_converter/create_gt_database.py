@@ -13,7 +13,7 @@ from mmdet3d.core.bbox import box_np_ops as box_np_ops
 from mmdet3d.datasets import build_dataset
 from mmdet.core.evaluation.bbox_overlaps import bbox_overlaps
 
-
+print("I am create_gt_ddddddddddatabase")
 def _poly2mask(mask_ann, img_h, img_w):
     if isinstance(mask_ann, list):
         # polygon -- a single object might consist of multiple parts

@@ -17,7 +17,7 @@ from ..core.bbox import CameraInstance3DBoxes, get_box_type
 from .builder import DATASETS
 from .pipelines import Compose
 from .utils import extract_result_dict, get_loading_pipeline
-
+print("I am nuscenes_mono_dataset")
 
 @DATASETS.register_module()
 class NuScenesMonoDataset(CocoDataset):
@@ -453,8 +453,8 @@ class NuScenesMonoDataset(CocoDataset):
         nusc = NuScenes(
             version=self.version, dataroot=self.data_root, verbose=False)
         eval_set_map = {
-            'v1.0-mini': 'mini_val',
             'v1.0-trainval': 'val',
+            'v1.0-mini': 'mini_val',
         }
         nusc_eval = NuScenesEval(
             nusc,

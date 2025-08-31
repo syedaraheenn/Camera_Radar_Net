@@ -8,7 +8,7 @@ from mmdet3d.core import draw_heatmap_gaussian, gaussian_radius
 from mmdet3d.models import build_neck
 from mmdet3d.models.dense_heads.centerpoint_head import CenterHead
 from mmdet3d.models.utils import clip_sigmoid
-
+print("I am bevdepth")
 __all__ = ['BEVDepthHead']
 
 bev_backbone_conf = dict(

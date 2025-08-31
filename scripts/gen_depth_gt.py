@@ -6,7 +6,7 @@ import numpy as np
 from nuscenes.utils.data_classes import LidarPointCloud
 from nuscenes.utils.geometry_utils import view_points
 from pyquaternion import Quaternion
-
+print("I am gen_depth")
 
 # https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/nuscenes.py#L834
 def map_pointcloud_to_image(

@@ -3,7 +3,7 @@ import torch
 from torch.autograd import Function
 
 from . import voxel_pooling_ext
-
+print("I am voxel pooling")
 
 class VoxelPooling(Function):
     @staticmethod

@@ -3,7 +3,7 @@ import argparse
 from collections import OrderedDict
 
 import torch
-
+print("I am reg______nettttttttttttt")
 
 def convert_stem(model_key, model_weight, state_dict, converted_names):
     new_key = model_key.replace('stem.conv', 'conv1')

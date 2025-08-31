@@ -8,7 +8,7 @@ from mmcv.runner import load_state_dict
 
 from mmdet3d.models import build_detector
 
-
+print("I am vollenetttt")
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet3D upgrade model version(before v0.6.0) of VoteNet')

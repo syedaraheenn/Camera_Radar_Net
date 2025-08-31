@@ -10,7 +10,7 @@ from mmcv.runner import load_checkpoint, wrap_fp16_model
 from mmdet3d.datasets import build_dataloader, build_dataset
 from mmdet3d.models import build_detector
 from tools.misc.fuse_conv_bn import fuse_module
-
+print('I am benchmaaaaaaaaark')
 
 def parse_args():
     parser = argparse.ArgumentParser(description='MMDet benchmark a model')

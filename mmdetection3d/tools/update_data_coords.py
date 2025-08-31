@@ -7,7 +7,7 @@ import numpy as np
 
 from mmdet3d.core.bbox import limit_period
 
-
+print("I am data_coordss")
 def update_sunrgbd_infos(root_dir, out_dir, pkl_files):
     print(f'{pkl_files} will be modified because '
           f'of the refactor of the Depth coordinate system.')
@@ -125,13 +125,13 @@ if __name__ == '__main__':
         # nuScenes dbinfos is in LIDAR coord sys (changed)
         # so we update both infos and dbinfos
         pkl_files = ['nuscenes_infos_val.pkl']
-        if args.version != 'v1.0-mini':
+        if args.version != 'v1.0-trainval':
             pkl_files.append('nuscenes_infos_train.pkl')
         else:
             pkl_files.append('nuscenes_infos_train_tiny.pkl')
         update_nuscenes_or_lyft_infos(
             root_dir=args.root_dir, out_dir=args.out_dir, pkl_files=pkl_files)
-        if args.version != 'v1.0-mini':
+        if args.version != 'v1.0-trainval':
             pkl_files = ['nuscenes_dbinfos_train.pkl']
             update_outdoor_dbinfos(
                 root_dir=args.root_dir,

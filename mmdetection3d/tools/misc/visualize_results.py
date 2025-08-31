@@ -6,7 +6,7 @@ from mmcv import Config
 
 from mmdet3d.datasets import build_dataset
 
-
+print("I am visualize_results")
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet3D visualize the results')

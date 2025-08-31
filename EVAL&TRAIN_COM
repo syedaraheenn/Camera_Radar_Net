@@ -1,0 +1,13 @@
+### Training and Evaluation
+**Training**
+```
+python /home/ivision/CRN/exps/det/CRN_r50_256x704_128x128_4key.py --amp_backend native -b 1 --gpus 1
+python /home/ivision/CRN/exps/det/CRNxYolo.py --amp_backend native -b 1 --gpus 1
+```
+
+**Evaluation**  
+*Note: use `-b 1 --gpus 1` to measure inference time.*
+```
+python /home/ivision/CRN/exps/det/CRN_r50_256x704_128x128_4key.py --ckpt_path /home/ivision/Downloads/CRN_r50_256x704_128x128_4key.pth -e -b 1 --gpus 1
+```
+

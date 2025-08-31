@@ -3,7 +3,7 @@ from torch.autograd import Function
 
 from . import average_voxel_pooling_ext
 
-
+print("I am avg_voxel")
 class AverageVoxelPooling(Function):
     @staticmethod
     def forward(ctx, geom_xyz: torch.Tensor, input_features: torch.Tensor,

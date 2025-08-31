@@ -7,7 +7,7 @@ from torch import nn as nn
 
 from mmdet3d.apis import init_model
 
-
+print("I amfuse_conv")
 def fuse_conv_bn(conv, bn):
     """During inference, the functionary of batch norm layers is turned off but
     only the mean and var alone channels are used, which exposes the chance to

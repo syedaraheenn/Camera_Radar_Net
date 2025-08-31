@@ -9,6 +9,7 @@ from mmdet.models import build_backbone
 from mmdet.models.backbones.resnet import BasicBlock
 
 from ops.voxel_pooling_v2 import voxel_pooling
+print("I am base_ISS_fpn")
 
 __all__ = ['BaseLSSFPN']
 
@@ -356,13 +357,13 @@ class BaseLSSFPN(nn.Module):
         # B x N x D x H x W x 3
         points = self.frustum
         ida_mat = ida_mat.view(batch_size, num_cams, 1, 1, 1, 4, 4)
-        points = ida_mat.inverse().matmul(points.unsqueeze(-1)).double()
+        points = (ida_mat.cpu().inverse().cuda()).matmul(points.unsqueeze(-1)).double()
         # cam_to_ego
         points = torch.cat(
             (points[:, :, :, :, :, :2] * points[:, :, :, :, :, 2:3],
              points[:, :, :, :, :, 2:]), 5)
 
-        combine = sensor2ego_mat.matmul(torch.inverse(intrin_mat)).double()
+        combine = sensor2ego_mat.matmul(torch.inverse(intrin_mat.cpu()).cuda()).double()
         points = combine.view(batch_size, num_cams, 1, 1, 1, 4,
                               4).matmul(points).half()
         if bda_mat is not None:
@@ -563,3 +564,4 @@ class BaseLSSFPN(nn.Module):
             return torch.cat(ret_feature_list, 1), key_frame_res[1], self.times
         else:
             return torch.cat(ret_feature_list, 1), self.times
+

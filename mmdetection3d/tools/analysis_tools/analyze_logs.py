@@ -6,7 +6,7 @@ from collections import defaultdict
 import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
-
+print("I am analyyze log")
 
 def cal_train_time(log_dicts, args):
     for i, log_dict in enumerate(log_dicts):

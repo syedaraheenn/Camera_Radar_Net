@@ -11,7 +11,7 @@ from mmcv.utils import ext_loader
 ext_module = ext_loader.load_ext(
     '_ext', ['ms_deform_attn_backward', 'ms_deform_attn_forward'])
 
-
+print("I am multi_scale")
 class MultiScaleDeformableAttnFunction_fp16(Function):
 
     @staticmethod

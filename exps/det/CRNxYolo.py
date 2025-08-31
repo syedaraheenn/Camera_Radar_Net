@@ -78,16 +78,19 @@ FPS: 22.74
 """
 import torch
 from utils.torch_dist import synchronize
-
+from ultralytics import YOLO
 from exps.base_cli import run_cli
 from exps.base_exp import BEVDepthLightningModel
 
 from models.camera_radar_net_det import CameraRadarNetDet
 
-print("I am modelll CRN_r50_256x704_128x128_4key.py")
+print("I am modelll CRNxYolo")
 class CRNLightningModel(BEVDepthLightningModel):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        import torch.nn as nn
+
+        self.projection_layer = nn.Conv2d(256, 80, kernel_size=1)  # Convert YOLO features to CRN format
 
         self.return_image = True
         self.return_depth = True
@@ -121,32 +124,30 @@ class CRNLightningModel(BEVDepthLightningModel):
         }
         ################################################
         self.backbone_img_conf = {
-            'x_bound': [-51.2, 51.2, 0.8],
-            'y_bound': [-51.2, 51.2, 0.8],
-            'z_bound': [-5, 3, 8],
-            'd_bound': [2.0, 58.0, 0.8],
-            'final_dim': (256, 704),
-            'downsample_factor': 16,
-            'img_backbone_conf': dict(
-                type='ResNet',
-                depth=50,
-                frozen_stages=0,
-                out_indices=[0, 1, 2, 3],
-                norm_eval=False,
-                init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50'),
-            ),
-            'img_neck_conf': dict(
-                type='SECONDFPN',
-                in_channels=[256, 512, 1024, 2048],
-                upsample_strides=[0.25, 0.5, 1, 2],
-                out_channels=[128, 128, 128, 128],
-            ),
-            'depth_net_conf':
-                dict(in_channels=512, mid_channels=256),
-            'radar_view_transform': True,
-            'camera_aware': False,
-            'output_channels': 80,
-        }
+        'x_bound': [-51.2, 51.2, 0.8],
+        'y_bound': [-51.2, 51.2, 0.8],
+        'z_bound': [-5, 3, 8],
+        'd_bound': [2.0, 58.0, 0.8],
+        'final_dim': (256, 704),
+        'downsample_factor': 16,
+        'output_channels': 80,  # ✅ Ensure this is included
+        'img_backbone_conf': dict(
+            type='YOLO',
+            model='yolov8s.pt',  # ✅ Load YOLOv8 small model
+            extract_features=True,  # Ensure it returns feature maps, not detections
+        ),
+        'img_neck_conf': dict(
+            type='SECONDFPN',
+            in_channels=[256, 512, 1024, 2048],
+            upsample_strides=[0.25, 0.5, 1, 2],
+            out_channels=[128, 128, 128, 128],
+        ),
+        'depth_net_conf': dict(in_channels=512, mid_channels=256),
+        'radar_view_transform': True,
+        'camera_aware': False,
+        'expected_channels': 256,  # ✅ YOLO outputs 256 feature channels
+}
+                
         ################################################
         self.backbone_pts_conf = {
             'pts_voxel_layer': dict(
@@ -279,7 +280,14 @@ class CRNLightningModel(BEVDepthLightningModel):
                                        self.head_conf)
 
     def forward(self, sweep_imgs, mats, is_train=False, **inputs):
-        return self.model(sweep_imgs, mats, sweep_ptss=inputs['pts_pv'], is_train=is_train)
+        #return self.model(sweep_imgs, mats, sweep_ptss=inputs['pts_pv'], is_train=is_train)
+# Extract YOLO feature maps
+        yolo_features = self.model.backbone_img.model.model[:10](sweep_imgs)
+# Pass through the projection layer to match CRN format
+        feats = self.projection_layer(yolo_features)
+
+# Forward pass with modified features
+        return self.model(feats, mats, is_train=is_train)
 
     def training_step(self, batch):
         if self.global_rank == 0:
@@ -326,6 +334,7 @@ class CRNLightningModel(BEVDepthLightningModel):
         synchronize()
 
         self.log('val/detection', torch.mean(torch.stack(detection_losses)), on_epoch=True)
+        self.log('val/heatmap', torch.mean(torch.stack(heatmap_losses)), on_epoch=True)
         self.log('val/bbox', torch.mean(torch.stack(bbox_losses)), on_epoch=True)
         self.log('val/depth', torch.mean(torch.stack(depth_losses)), on_epoch=True)
 
@@ -357,4 +366,4 @@ class CRNLightningModel(BEVDepthLightningModel):
 
 if __name__ == '__main__':
     run_cli(CRNLightningModel,
-            'det/CRN_r50_256x704_128x128_4key')
+            'det/CRNxYolo')

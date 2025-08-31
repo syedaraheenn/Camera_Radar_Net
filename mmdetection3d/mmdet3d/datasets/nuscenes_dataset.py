@@ -12,7 +12,7 @@ from ..core.bbox import Box3DMode, Coord3DMode, LiDARInstance3DBoxes
 from .builder import DATASETS
 from .custom_3d import Custom3DDataset
 from .pipelines import Compose
-
+print("I am nuscenes dataset.py")
 
 @DATASETS.register_module()
 class NuScenesDataset(Custom3DDataset):
@@ -393,8 +393,9 @@ class NuScenesDataset(Custom3DDataset):
         nusc = NuScenes(
             version=self.version, dataroot=self.data_root, verbose=False)
         eval_set_map = {
-            'v1.0-mini': 'mini_val',
+            'v1.0-test':'test',
             'v1.0-trainval': 'val',
+            'v1.0-mini': 'mini_val',
         }
         nusc_eval = NuScenesEval(
             nusc,

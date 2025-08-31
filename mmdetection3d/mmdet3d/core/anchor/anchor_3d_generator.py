@@ -3,7 +3,7 @@ import mmcv
 import torch
 
 from mmdet.core.anchor import ANCHOR_GENERATORS
-
+print("I am anchor 3d")
 
 @ANCHOR_GENERATORS.register_module()
 class Anchor3DRangeGenerator(object):

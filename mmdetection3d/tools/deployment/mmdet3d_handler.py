@@ -8,7 +8,7 @@ from ts.torch_handler.base_handler import BaseHandler
 
 from mmdet3d.apis import inference_detector, init_model
 from mmdet3d.core.points import get_points_type
-
+print("I am mmhandler")
 
 class MMdet3dHandler(BaseHandler):
     """MMDetection3D Handler used in TorchServe.

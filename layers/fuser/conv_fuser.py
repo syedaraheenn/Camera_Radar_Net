@@ -3,7 +3,7 @@ from torch import nn
 from torch.cuda.amp import autocast
 
 from mmcv.runner.base_module import ModuleList
-
+print("I am conv_fuser")
 class ConvFuser(nn.Module):
     def __init__(self, num_sweeps=4, img_dims=80, pts_dims=80, embed_dims=128, num_layers=3, **kwargs):
         super(ConvFuser, self).__init__()

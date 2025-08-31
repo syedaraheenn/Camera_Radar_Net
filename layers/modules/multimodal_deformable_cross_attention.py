@@ -13,7 +13,7 @@ from mmcv.runner.base_module import BaseModule
 
 from .multi_scale_deformable_attn_function import MultiScaleDeformableAttnFunction_fp32
 
-
+print("I am multimodal_deformm")
 class DeformableCrossAttention(BaseModule):
     """Multi-modal Feature Aggregation module used in CRN based on Deformable-Detr.
 

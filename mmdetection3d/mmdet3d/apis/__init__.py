@@ -5,6 +5,7 @@ from .inference import (convert_SyncBN, inference_detector,
                         init_model, show_result_meshlab)
 from .test import single_gpu_test
 from .train import init_random_seed, train_model
+print("I am apis_first_file")
 
 __all__ = [
     'inference_detector', 'init_model', 'single_gpu_test',

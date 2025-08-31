@@ -9,7 +9,7 @@ from tools.data_converter import nuscenes_converter as nuscenes_converter
 from tools.data_converter.create_gt_database import (
     GTDatabaseCreater, create_groundtruth_database)
 
-
+print("I am create_data")
 def kitti_data_prep(root_path,
                     info_prefix,
                     version,
@@ -245,7 +245,7 @@ if __name__ == '__main__':
             version=args.version,
             out_dir=args.out_dir,
             with_plane=args.with_plane)
-    elif args.dataset == 'nuscenes' and args.version != 'v1.0-mini':
+    elif args.dataset == 'nuscenes' and args.version != 'v1.0-trainval':
         train_version = f'{args.version}-trainval'
         nuscenes_data_prep(
             root_path=args.root_path,
@@ -262,7 +262,7 @@ if __name__ == '__main__':
             dataset_name='NuScenesDataset',
             out_dir=args.out_dir,
             max_sweeps=args.max_sweeps)
-    elif args.dataset == 'nuscenes' and args.version == 'v1.0-mini':
+    elif args.dataset == 'nuscenes' and args.version == 'v1.0-trainval':
         train_version = f'{args.version}'
         nuscenes_data_prep(
             root_path=args.root_path,

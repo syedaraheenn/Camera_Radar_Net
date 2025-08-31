@@ -10,7 +10,7 @@ try:
     from mmcv.cnn import get_model_complexity_info
 except ImportError:
     raise ImportError('Please upgrade mmcv to >0.6.2')
-
+print("I am get_flopss")
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')

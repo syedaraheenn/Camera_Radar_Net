@@ -11,7 +11,7 @@ try:
 except ImportError:
     package_model = None
 
-
+print("I am torchservemmdet")
 def mmdet3d2torchserve(
     config_file: str,
     checkpoint_file: str,

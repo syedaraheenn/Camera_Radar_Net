@@ -14,7 +14,7 @@ from mmdet3d.core.visualizer import (show_multi_modality_result, show_result,
                                      show_seg_result)
 from mmdet3d.datasets import build_dataset
 
-
+print("I am browse")
 def parse_args():
     parser = argparse.ArgumentParser(description='Browse a dataset')
     parser.add_argument('config', help='train config file path')

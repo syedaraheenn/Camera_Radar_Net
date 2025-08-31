@@ -9,7 +9,7 @@ import torch.nn as nn
 from pytorch_lightning.callbacks import Callback
 
 __all__ = ['ModelEMA', 'is_parallel']
-
+print("I am ema.py")
 
 def is_parallel(model):
     """check if model is in parallel mode."""

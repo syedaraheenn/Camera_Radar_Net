@@ -13,7 +13,7 @@ def parse_args():
 
     return args
 
-
+print("I am print_config")
 def main():
     args = parse_args()
 

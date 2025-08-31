@@ -10,7 +10,7 @@ logger.setLevel('WARNING')
 
 __all__ = ['BaseBEVDepth']
 
-
+print("I am base_bev_depth")
 class BaseBEVDepth(nn.Module):
     """Source code of `BEVDepth`, `https://arxiv.org/abs/2112.11790`.
 

@@ -4,7 +4,7 @@ import subprocess
 
 import torch
 
-
+print("I am publish_model")
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Process a checkpoint to be published')

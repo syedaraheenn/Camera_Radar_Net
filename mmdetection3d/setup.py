@@ -10,7 +10,7 @@ import torch
 from torch.utils.cpp_extension import (BuildExtension, CppExtension,
                                        CUDAExtension)
 
-
+print("I am setupppppp.py")
 def readme():
     with open('README.md', encoding='utf-8') as f:
         content = f.read()

@@ -3,7 +3,7 @@
 @contact: zengarden2009@gmail.com
 """
 from torch import distributed as dist
-
+print("I am torch_dist")
 
 def get_rank() -> int:
     if not dist.is_available():
